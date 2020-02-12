@@ -1,0 +1,91 @@
+import 'package:flutter/material.dart';
+
+void main(){
+  runApp(MaterialApp(
+    title: "contador de pessoas",
+    
+    home: Home()
+  ));//home);
+}
+
+class Home extends StatefulWidget {
+ 
+  
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+
+class _HomeState extends State<Home> {
+  
+    int _p = 0;
+   String _text = "Pode entrar";
+  
+    void _changeP(int delta){
+      setState((){
+         _p += delta;
+        
+        if (_p<0){
+          _text = "Erro!";
+        }
+        else if(_p>0 && _p<=10){
+          _text = "Pode Entrar";
+        }
+        
+        else {
+          _text = "Lotado";
+        }
+      });
+     
+    }
+  
+ @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: <Widget>[
+        Image.asset(
+        "download/restaurant.jpg",fit: BoxFit.cover, height: 1000.0),// Imagem de fundo
+        Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+      Text("Pessoas: $_p", 
+           style: TextStyle(color: Colors.cyan, fontWeight: FontWeight.bold),
+          ),//text
+      
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(10.0),
+            child:   FlatButton(
+          child: Text("+1", style: TextStyle(color : Colors.cyan, fontSize: 20.0)),//Child
+          onPressed: (){_changeP( 1);},
+        ),//FlatButton
+      
+          ),
+          
+          Padding(
+            padding: EdgeInsets.all(10.0),
+            child: FlatButton(
+              child: Text("-1", style: TextStyle(color: Colors.cyan, fontSize: 20.0)),
+              
+              onPressed: (){_changeP(-1);},
+            
+            ),
+          ),
+
+        ]
+      ),// row
+      Text("Pode Entrar!", 
+           style: TextStyle(color: Colors.cyanAccent, fontStyle: FontStyle.italic,
+                           fontSize:30.0)
+          ),//text
+    ],//Widget
+   )
+        
+      ],
+    );//Stack
+  }
+}
+
+
